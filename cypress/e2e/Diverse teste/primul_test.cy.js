@@ -1,3 +1,5 @@
+const cypress = require("cypress")
+
 describe("Suita 1", () => {
     //Testul nr 1
     it("test 1", () => {

@@ -1,0 +1,180 @@
+https://docs.cypress.io/app/core-concepts/introduction-to-cypress
+
+https://docs.cypress.io/app/guides/cypress-studio
+
+https://learn.cypress.io/testing-your-first-application
+
+https://github.com/cypress-io/cypress-realworld-testing-blog
+
+npm run dev
+
+https://www.lambdatest.com/blog/how-to-handle-iframes-in-cypress/
+
+
+
+Cypress test structure:
+
+describe("empty spec", () => {
+  it("passes", () => {
+    cy.visit("https://example.cypress.io")
+  })
+})
+
+On the first line, we see what is commonly referred to as a “describe block.”. This is a test suite.
+
+describe("empty spec", () => {})
+The describe() function takes two arguments: 
+	The first is a string which is a description of the tests contained within it. 
+	The second is a callback function, that wraps all the "it blocks".
+
+Next, within the body of our describe() is what is commonly referred to as an “it block.”
+This is our actual test. It's like a test case, which contains test steps.
+
+Each time you see it() within a given spec file that is a single test. 
+It takes the exact same arguments as the describe() function: first a string and then a callback function. 
+
+
+
+Ordinea alegerii DOM-urilor (Document Object Model ):
+1. data-cy
+2. data-test
+3. data-testid - cand pui data-testid, trebuie sa pui [] (ex. cy.get("[data-testid=username-input]");)
+4. id - cand pui id, trebuie sa pui # (ex. cy.get("#username");)
+5. class - cand pui class, trebuie sa pui . (ex. cy.get(".form-control");) Nu poti avea spatiu la nume. In loc de spatiu se pune .
+6. tag (div, img, button...) - cand pui tag, trebuie sa pui tagname.classname
+7. other attributes - CSS :(name, size, role...) - tagname[attribute=value] (ex. cy.get(input[type='search']);)
+8. nth-child - tr td:nth-child(2) - Ca sa ajungi la indexul 2 din CSS, intr-un tabel?
+
+
+
+Tests should be composed using a pattern that makes them easy to write, reason about, and expand. 
+
+One pattern is the AAA (Arrange-Act-Assert) pattern, which encourages the organization of the test code 
+in a way that allows the most readability and flexibility.
+
+Full code:
+describe("React TodoMVC", () => {
+  it("adds a single todo", () => {
+    cy.visit("http://localhost:8888") // Arrange
+    cy.get(".new-todo").type("Buy Milk{enter}") // Act
+    cy.get(".todo-list li").should("have.length", 1) // Assert
+  })
+})
+
+In step one, the Arrange step, you have to perform some setup for your test. 
+For example, in the case of a Cypress end-to-end test, you need to tell Cypress to open the browser 
+and navigate to the correct URL.
+
+cy.visit("http://localhost:8888")
+
+
+In step two, the Act step, you perform some action. For example, in the case of a todo app, 
+you want to test that you can add a single todo.
+
+cy.get(".new-todo").type("Buy Milk{enter}")
+
+
+Finally, in step three, you Assert. In this step, you assert that the thing you acted upon in step two did what you expected.
+
+cy.get(".todo-list li").should("have.length", 1)
+
+
+
+Command chaining is when you “chain” multiple commands off of one another.
+
+describe("home page", () => {
+  it("the h1 contains the correct text", () => {
+    cy.visit("https://example.cypress.io");
+	cy.get("h1").contains("Testing Next.js Applications with Cypress");
+  })
+})
+
+First, we are using cy.get() to get the h1 element on our home page.
+Next, we are chaining another command called contains onto the cy.get() which accepts a string. 
+We are passing into the contains command a string of text which we expect to be inside of the h1 element.
+
+
+
+Aliases - You can alias an element for a easier reference
+
+cy.get('.products').as('productLocator');
+cy.get('@productLocator').find('.product').should('have.length', 4);
+
+
+
+There are two useful ways to log information from your tests. 
+	One way is to use cy.log() -  display the message in the runner window (cypress) 
+	The other is to use console.log() - display the message in the Chrome console dev tools. - is nore related to cypress
+	
+	
+Cypress auto accepts alerts and pop ups.
+
+
+
+Cypress can't open pages in new tab.
+For this, we need to manipulate the DOM, in order to open it in the same page.
+
+
+
+Mouse hover events are not supported in Cypress.
+
+
+
+Cypress can't open pages in new window.
+For this, we need to manipulate the DOM, in order to open it in the same page.
+
+
+
+Test Hooks
+These are helpful to set conditions that you want to run before or after a set of tests.
+These are: before, after, beforeEach, afterEach
+
+
+
+cy.pause(); - You can add this command to pause the test, to debug it. You need to manually resume the test.
+cy.debug(); - It's the same.
+
+
+
+then() - With then() you resolve a promise when you need to do some operations on a element.
+
+
+
+Environmental variables - are set in config_file. We can declare there the base url for all tests, when in each test just complete the subdomain. (ex. Test4_framework) 
+
+
+
+We can tell Cypress to only run a specific test by using it.only() like so:
+ it.only("the features on the homepage are correct", () => {
+    cy.visit("http://localhost:3000")
+  })
+By adding .only() after the it we are telling Cypress to only run this specific test.
+Daca adaugi skip, nu face testul.
+
+
+beforeEach(() => {
+    cy.visit("http://localhost:3000")
+  })
+We can simplify this and put the cy.visit() in a single spot called a beforeEach() hook. 
+This is a function that will get called “before each” test is run, which is exactly what we want.
+
+
+What the context method does is allow us to group related tests together making our spec file easier to read.
+
+Context e acelasi cu describe.
+
+
+
+You can tell Cypress to take a screenshot manually by using the cy.screenshot() command.
+
+
+
+
+Poti sa pui baseURL in fisierul cypress.config.js:
+e2e: {
+baseUrl : 'https://example.cypress.io',
+
+Apoi in test scrii doar cy.visit('/') in loc de adresa.
+
+
+

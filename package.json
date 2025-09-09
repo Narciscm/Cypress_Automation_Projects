@@ -1,5 +1,6 @@
 {
-  "dependencies": {
-    "cypress": "^15.0.0"
+  "devDependencies": {
+    "cypress": "^15.1.0",
+    "cypress-iframe": "^1.0.1"
   }
 }

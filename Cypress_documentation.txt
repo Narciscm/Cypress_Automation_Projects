@@ -177,4 +177,15 @@ baseUrl : 'https://example.cypress.io',
 Apoi in test scrii doar cy.visit('/') in loc de adresa.
 
 
+To run a test from command line:
+npx cypress run --spec ".\cypress\e2e\Teste_Saucedemo\" - asa rulezi un test
+npx cypress run --record --spec "cypress/e2e/my-spec.cy.js"
+npx cypress run --record --key 79ef84d2-d1a7-4cd3-88c4-50f06b85e6f7  - sa se salveze in cloud
+npx cypress run --record --key 79ef84d2-d1a7-4cd3-88c4-50f06b85e6f7 --spec ".\cypress\e2e\Teste_Saucedemo\"
 
+
+To run a script:
+npm run GreenKartTests
+
+Jenkins:
+http://localhost:9090/ admin 8390d4edba2f4dc48e5da8760d2f1f6c

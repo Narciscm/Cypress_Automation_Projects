@@ -1,6 +1,18 @@
 {
+  "scripts": {
+    "test": "node_modules\\.bin\\cypress run",
+    "SauceDemoTests": "cypress run --spec \"./cypress/e2e/Teste_Saucedemo\"",
+    "GreenKartTests": "cypress run --spec \"./cypress/e2e/Udemy course_Cypress Modern Automation Testing from Scratch+Frameworks/GreenKart_shop\"",
+    "PracticeTests": "cypress run --spec \"./cypress/e2e/Udemy course_Cypress Modern Automation Testing from Scratch+Frameworks/Practice_page\"",
+    "ProtoCommerceTests": "cypress run --spec \"./cypress/e2e/Udemy course_Cypress Modern Automation Testing from Scratch+Frameworks/ProtoCommerce_shop\"",
+    "AllTests": "npm run test -- --spec \"./cypress/e2e/Teste_Saucedemo/*\""
+  },
   "devDependencies": {
-    "cypress": "^15.1.0",
+    "cypress": "^15.2.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-iframe": "^1.0.1"
-  }
+  },
+"cypress-cucumber-preprocessor": {
+  "nonGlobalStepDefinitions": false
+}
 }
